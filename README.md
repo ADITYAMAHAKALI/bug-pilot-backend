@@ -1,9 +1,9 @@
 # bug-tracker-backend
 
 ## Project Details
-Project Title: Bug Tracker
-Project Description: Bug Tracker System for Hsc Major Project using Spring-Boot and Mysql as Backend Technologies
-Project Version: 1.0.0
+- Project Title: Bug Tracker
+- Project Description: Bug Tracker System for Hsc Major Project using Spring-Boot and Mysql as Backend Technologies
+- Project Version: 1.0.0
 
 __________________________________________________
 
@@ -20,13 +20,16 @@ __________________________________________________
 1. clone the repo.
 2. cd into the project directory with pom.xml.
 3. Choose your favorite IDE and import the project and run the project.
-3. run `mvn clean install` or '`\mvnw` for windows and `./mvnw` for linux/mac.
-4. run `mvn spring-boot:run` or `.\mvnw` for window' and `./mvnw` for linux/mac.
+3. run `mvn clean install` or '`.\mvnw` for windows and `./mvnw` for linux/mac.
+4. run `mvn spring-boot:run` or `.\mvnw` for windows and `./mvnw` for linux/mac.
+5. create a databse with name bugtracker im MySQl.
+6. Add Proper username and password in application.yaml file for the database.
 __________________________________________________
 
 ## Project ToDos 
 - [ ] Writing and fianlizing Concise Requirements
 - [ ] Create Database Schema
+- [ ] Configure Application.yaml
 - [ ] Creation of Pojo classes
 - [ ] Creation of DaoRepositories
 - [ ] Creation of Services Interfaces
