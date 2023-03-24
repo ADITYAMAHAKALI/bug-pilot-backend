@@ -84,8 +84,12 @@ public class BugServiceImpl implements BugService{
     public Bug updateBugById(Long bugId, Bug bug) {
         try{
             if(bugDAO.findById(bugId).isPresent()){
-                bugDAO.deleteById(bugId);
-                return bugDAO.save(bug);
+                Bug new_bug = this.fetchBugById(bugId).get();
+                new_bug.setBugTitle(bug.getBugTitle());
+                new_bug.setBugAuthor(bug.getBugAuthor());
+                new_bug.setBugLabel(bug.getBugLabel());
+                new_bug.setOpen(bug.isOpen());
+                return bugDAO.save(new_bug);
             }else{
                 throw new Exception("Bug not found");
             }

@@ -68,15 +68,7 @@ public class BugContoller {
             return ResponseEntity.notFound().build();
         }
     }
-    @PutMapping
-    public ResponseEntity<Bug> updateBug(@RequestBody Bug bug){
-        try{
-            return ResponseEntity.ok(bugService.updateBug(bug));
-        }catch(Exception e){
-            e.printStackTrace();
-            return ResponseEntity.notFound().build();
-        }
-    }
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteBug(@PathVariable Long id){
         try{
