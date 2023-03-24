@@ -1,15 +1,12 @@
 package com.hsc.project.BugTracker.model;
 
 import java.time.LocalDateTime;
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
-
 import lombok.Data;
 
 
@@ -17,7 +14,7 @@ import lombok.Data;
 @Entity
 public class Bug {
     @Id
-    @GeneratedValue(generator = "bug_id_seq", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long bugId;
     private String bugTitle;
     @Column
