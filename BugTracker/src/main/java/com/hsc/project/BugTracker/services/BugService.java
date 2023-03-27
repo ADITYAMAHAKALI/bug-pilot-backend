@@ -12,4 +12,5 @@ public interface BugService {
     Bug updateBug(Bug bug);
     void deleteBugById(Long bugId);
     Bug updateBugById(Long bugId, Bug bug);
+    List<Bug> fetchAllBugsByProjectId(Long projectId);
 }

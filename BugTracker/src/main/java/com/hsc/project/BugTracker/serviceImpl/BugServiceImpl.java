@@ -1,4 +1,5 @@
 package com.hsc.project.BugTracker.serviceImpl;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -10,11 +11,11 @@ import com.hsc.project.BugTracker.model.Bug;
 import com.hsc.project.BugTracker.services.BugService;
 
 @Service
-public class BugServiceImpl implements BugService{
+public class BugServiceImpl implements BugService {
 
     @Autowired
     private BugDAO bugDAO;
-    
+
     @Override
     public Bug saveBug(Bug bug) {
         return bugDAO.save(bug);
@@ -24,26 +25,11 @@ public class BugServiceImpl implements BugService{
     public List<Bug> fetchAllBugs() {
         return (List<Bug>) bugDAO.findAll();
     }
+
     @Override
     public Optional<Bug> fetchBugById(Long bugId) {
         return bugDAO.findById(bugId);
     }
-
-    // @Override
-    // public Bug updateBug(Bug bug) {
-    //     try{
-    //         if(bugDAO.findById(bug.getBugId()).isPresent()){
-    //             System.out.println("Bug found" + bug);
-    //             return bugDAO.save(bug);
-    //         }
-    //         else{
-    //             throw new Exception("Bug not found");
-    //         }
-    //     }catch(Exception e){
-    //         e.printStackTrace();
-    //         return null;
-    //     }
-    // }
 
     @Override
     public Bug updateBug(Bug bug) {
@@ -68,36 +54,40 @@ public class BugServiceImpl implements BugService{
 
     @Override
     public void deleteBugById(Long bugId) {
-       try{
-        if(bugDAO.findById(bugId).isPresent()){
-            bugDAO.deleteById(bugId);
+        try {
+            if (bugDAO.findById(bugId).isPresent()) {
+                bugDAO.deleteById(bugId);
+            } else {
+                throw new Exception("Bug not found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        else{
-            throw new Exception("Bug not found");
-        }
-       }catch(Exception e){
-           e.printStackTrace();
-       }
     }
 
     @Override
     public Bug updateBugById(Long bugId, Bug bug) {
-        try{
-            if(bugDAO.findById(bugId).isPresent()){
+        try {
+            if (bugDAO.findById(bugId).isPresent()) {
                 Bug new_bug = this.fetchBugById(bugId).get();
                 new_bug.setBugTitle(bug.getBugTitle());
                 new_bug.setBugAuthor(bug.getBugAuthor());
                 new_bug.setBugLabel(bug.getBugLabel());
                 new_bug.setOpen(bug.isOpen());
                 return bugDAO.save(new_bug);
-            }else{
+            } else {
                 throw new Exception("Bug not found");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
-    
+
+    @Override
+    public List<Bug> fetchAllBugsByProjectId(Long projectId) {
+        return bugDAO.findByProjectProjectId(projectId);
+        
+    }
 
 }
