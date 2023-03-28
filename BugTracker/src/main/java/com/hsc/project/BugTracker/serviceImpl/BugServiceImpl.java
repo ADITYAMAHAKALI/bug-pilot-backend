@@ -67,21 +67,23 @@ public class BugServiceImpl implements BugService {
 
     @Override
     public Bug updateBugById(Long bugId, Bug bug) {
-        try {
-            if (bugDAO.findById(bugId).isPresent()) {
-                Bug new_bug = this.fetchBugById(bugId).get();
-                new_bug.setBugTitle(bug.getBugTitle());
-                new_bug.setBugAuthor(bug.getBugAuthor());
-                new_bug.setBugLabel(bug.getBugLabel());
-                new_bug.setOpen(bug.isOpen());
-                return bugDAO.save(new_bug);
-            } else {
+      try{
+            Optional<Bug> existingBug = bugDAO.findById(bugId);
+            if(existingBug.isPresent()){
+                Bug updatedBug = existingBug.get();
+                updatedBug.setBugTitle(bug.getBugTitle());
+                updatedBug.setBugAuthor(bug.getBugAuthor());
+                updatedBug.setBugLabel(bug.getBugLabel());
+                updatedBug.setOpen(bug.isOpen());
+                System.out.println("Bug found" + updatedBug);
+                return bugDAO.save(updatedBug);
+            }else{
                 throw new Exception("Bug not found");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+      }catch (Exception e) {
+          e.printStackTrace();
+          return null;
+      }
     }
 
     @Override
