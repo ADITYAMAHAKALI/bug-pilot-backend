@@ -38,7 +38,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
+        return http.cors().and().csrf().disable()
             .authorizeRequests()
             .antMatchers(HttpMethod.POST, "/api/bug") .hasAuthority("SCOPE_writebugs")
             .antMatchers(HttpMethod.DELETE, "/api//bug") .hasAuthority("SCOPE_deletebugs")
