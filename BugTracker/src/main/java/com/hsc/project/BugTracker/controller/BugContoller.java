@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hsc.project.BugTracker.model.Bug;
 import com.hsc.project.BugTracker.services.BugService;
 
-@CrossOrigin(origins = "http://localhost:3001")
+// @CrossOrigin(origins = "http://localhost:3001")
 @RestController
 @RequestMapping("/api/bug")
 public class BugContoller {
 
     @Autowired
     private BugService bugService;
+
     @GetMapping("/{id}")
     public ResponseEntity<Bug> getBugById(@PathVariable Long id){
         try{

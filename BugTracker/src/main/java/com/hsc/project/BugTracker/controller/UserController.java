@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.hsc.project.BugTracker.dao.UserDAO;
 import com.hsc.project.BugTracker.model.LoginDetails;
 import com.hsc.project.BugTracker.model.User;
+import com.nimbusds.jose.shaded.json.JSONObject;
 
 @Controller
-@CrossOrigin(origins="http://localhost:9090")
+// @CrossOrigin(origins="http://localhost:9090")
 public class UserController {
     @Autowired
     private UserDAO userRepo;
@@ -46,7 +46,10 @@ public class UserController {
             } else {
                 User user1 = userRepo.findByEmail(user.getEmail());
                 if (encoder.matches(user.getPassword(), user1.getPassword())) {
-                    return ResponseEntity.ok("User Logged in");
+                    JSONObject obj = new JSONObject();
+                    obj.put("id" , user1.getUserId());
+                    obj.put("message","User Logged in");
+                    return ResponseEntity.ok(obj.toString());
                 } else {
                     return ResponseEntity.badRequest().body("Password doesn't match");
                 }
