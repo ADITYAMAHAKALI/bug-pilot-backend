@@ -47,6 +47,8 @@ public class SecurityConfig {
             .antMatchers(HttpMethod.POST, "/login").permitAll()
             .and()
             .oauth2ResourceServer(oauth2 -> oauth2.jwt())
+            .logout()
+            .logoutSuccessUrl("/").and()
             .build();
     }
 

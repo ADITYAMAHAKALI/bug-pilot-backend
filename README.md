@@ -41,6 +41,40 @@ __________________________________________________
 - [ ] Corverting the project to Microservices
 - [ ] Adding Docker to containerize the project
 
+________________________________________________
+## List of Rest Apis to be created
+- [ ] User
+    - [X] Create User
+    - [ ] Update User
+    - [ ] Delete User
+    - [ ] Get User
+    - [ ] Get All Users
+
+- [ ] Project
+    - [ ] Create Project
+    - [ ] Update Project
+    - [ ] Delete Project
+    - [ ] Get Project
+    - [ ] Get All Projects
+    - [ ] Get All Projects by a user
+
+- [ ] ProjectRoles
+    - [ ] Create ProjectRoles
+    - [ ] Update ProjectRoles
+    - [ ] Delete ProjectRoles
+    - [ ] Get ProjectRoles
+    - [ ] Get All ProjectRoles
+
+- [ ] Bug
+    - [ ] Create Bugs in project
+    - [ ] Update Bug in project
+    - [ ] Delete Bug 
+    - [ ] Get Bug
+    - [ ] Get All Bugs in a project
+    = [ ] Get All Bugs in a project by a user
+    - [ ] Get All Bugs in a project by a user and a status
+
+
 
 
 
