@@ -27,13 +27,13 @@ __________________________________________________
 __________________________________________________
 
 ## Project ToDos 
-- [ ] Writing and fianlizing Concise Requirements
-- [ ] Create Database Schema
-- [ ] Configure Application.yaml
-- [ ] Creation of Pojo classes
-- [ ] Creation of DaoRepositories
-- [ ] Creation of Services Interfaces
-- [ ] Creation of Services Implementations
+- [X] Writing and fianlizing Concise Requirements
+- [X] Create Database Schema
+- [X] Configure Application.yaml
+- [X] Creation of Pojo classes
+- [X] Creation of DaoRepositories
+- [X] Creation of Services Interfaces
+- [X] Creation of Services Implementations
 - [ ] Creation of Rest_Controllers
 - [ ] Adding Unit Tests
 - [ ] Adding Outh 2.0 to secure Api's

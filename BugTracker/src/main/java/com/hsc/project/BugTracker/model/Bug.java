@@ -1,6 +1,8 @@
 package com.hsc.project.BugTracker.model;
 
 import java.time.LocalDateTime;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,12 +33,12 @@ public class Bug {
     }
 
     // many bugs can be associated with one project
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "projectId")
     private Project project;
 
     // one bug can be created by one user as author
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private User author;
 
