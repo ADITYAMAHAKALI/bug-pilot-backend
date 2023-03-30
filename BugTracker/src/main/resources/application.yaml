@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/bugtracker
     username: root
-    password: MSIdatabase@123
+    password: Amkisgr8$
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
