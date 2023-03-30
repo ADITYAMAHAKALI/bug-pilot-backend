@@ -40,9 +40,9 @@ public class BugContoller {
     }
 
     @GetMapping
-    public ResponseEntity<List<Bug>> getAllBugs(){
+    public ResponseEntity<List<Bug>> getAllBugs(@PathVariable Long project_id){
         try{
-            return ResponseEntity.ok(bugService.fetchAllBugs());
+            return ResponseEntity.ok(bugService.fetchAllBugsByProjectId(project_id));
         }catch(Exception e){
             e.printStackTrace();
             return ResponseEntity.notFound().build();
