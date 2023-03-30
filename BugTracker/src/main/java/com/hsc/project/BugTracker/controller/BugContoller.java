@@ -18,7 +18,7 @@ import com.hsc.project.BugTracker.services.BugService;
 
 // @CrossOrigin(origins = "http://localhost:3001")
 @RestController
-@RequestMapping("/api/bug")
+@RequestMapping("/api/{project_id}/bug")
 public class BugContoller {
 
     @Autowired
@@ -39,7 +39,7 @@ public class BugContoller {
         }
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<Bug>> getAllBugs(){
         try{
             return ResponseEntity.ok(bugService.fetchAllBugs());
@@ -49,10 +49,10 @@ public class BugContoller {
         }
     }
 
-    @PostMapping("/")
-    public ResponseEntity<Bug> saveBug(@RequestBody Bug bug){
+    @PostMapping
+    public ResponseEntity<Bug> saveBug(@RequestBody Bug bug,@PathVariable Long project_id){
         try{
-            return ResponseEntity.ok(bugService.saveBug(bug));
+            return ResponseEntity.ok(bugService.saveBug(bug,project_id));
         }catch(Exception e){
             e.printStackTrace();
             return ResponseEntity.notFound().build();

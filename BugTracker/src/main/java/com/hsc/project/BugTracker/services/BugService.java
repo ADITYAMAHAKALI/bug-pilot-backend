@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.hsc.project.BugTracker.model.Bug;
 
 public interface BugService {
-    Bug saveBug(Bug bug);
+    Bug saveBug(Bug bug,Long projectId);
     List<Bug> fetchAllBugs();
     Optional<Bug> fetchBugById(Long bugId);
     Bug updateBug(Bug bug);

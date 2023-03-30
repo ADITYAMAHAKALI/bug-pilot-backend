@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.hsc.project.BugTracker.dao.ProjectDAO;
+import com.hsc.project.BugTracker.dao.UserDAO;
 import com.hsc.project.BugTracker.model.Project;
 import com.hsc.project.BugTracker.services.ProjectService;
 
@@ -16,8 +16,12 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     ProjectDAO projectDAO;
 
+    @Autowired
+    UserDAO userDAO;
+
     @Override
-    public Project saveProject(Project project) {
+    public Project saveProject(Project project, Long userId) {
+        project.setUser(userDAO.findById(userId).get());
         return projectDAO.save(project);
     }
 
@@ -43,7 +47,7 @@ public class ProjectServiceImpl implements ProjectService {
                 Project updatedProject = existingProject.get();
                 updatedProject.setProjectName(project.getProjectName());
                 updatedProject.setProjectDescription(project.getProjectDescription());
-                System.out.println("Project found" + updatedProject);
+               // System.out.println("Project found" + updatedProject);
                 return projectDAO.save(updatedProject);
             } else {
                 throw new Exception("Project not found");
@@ -71,7 +75,7 @@ public class ProjectServiceImpl implements ProjectService {
                 Project updatedProject = existingProject.get();
                 updatedProject.setProjectName(project.getProjectName());
                 updatedProject.setProjectDescription(project.getProjectDescription());
-                System.out.println("Project found" + updatedProject);
+               //System.out.println("Project found" + updatedProject);
                 return projectDAO.save(updatedProject);
             } else {
                 throw new Exception("Project not found");
@@ -79,6 +83,24 @@ public class ProjectServiceImpl implements ProjectService {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    // @Override
+    // public List<Bug> fetchAllBugsByProjectId(Long projectId) {
+    //     if (projectDAO.findById(projectId) != null) {
+    //         return null;
+    //     } else {
+    //         throw new RuntimeException("Project not found");
+    //     }
+    // }
+
+    @Override
+    public List<Project> fetchAllProjectsByUserId(Long userId) {
+        if (userDAO.findById(userId) != null) {
+            return projectDAO.findByUserUserId(userId);
+        } else {
+            throw new RuntimeException("User not found");
         }
     }
 

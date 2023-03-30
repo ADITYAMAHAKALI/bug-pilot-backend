@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.hsc.project.BugTracker.dao.ProjectRolesDAO;
 import com.hsc.project.BugTracker.model.ProjectRoles;
 import com.hsc.project.BugTracker.services.ProjectRolesService;
 
+@Service
 public class ProjectRolesServiceImpl implements ProjectRolesService{
 
     @Autowired

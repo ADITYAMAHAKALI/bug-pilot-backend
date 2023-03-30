@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hsc.project.BugTracker.dao.BugDAO;
+import com.hsc.project.BugTracker.dao.ProjectDAO;
 import com.hsc.project.BugTracker.model.Bug;
 import com.hsc.project.BugTracker.services.BugService;
 
@@ -15,9 +16,12 @@ public class BugServiceImpl implements BugService {
 
     @Autowired
     private BugDAO bugDAO;
+    @Autowired
+    private ProjectDAO projectDao;
 
     @Override
-    public Bug saveBug(Bug bug) {
+    public Bug saveBug(Bug bug, Long projectId) {
+        bug.setProject(projectDao.findById(projectId).get());
         return bugDAO.save(bug);
     }
 
@@ -41,7 +45,7 @@ public class BugServiceImpl implements BugService {
                 updatedBug.setBugAuthor(bug.getBugAuthor());
                 updatedBug.setBugLabel(bug.getBugLabel());
                 updatedBug.setOpen(bug.isOpen());
-                System.out.println("Bug found" + updatedBug);
+               // System.out.("Bug found" + updatedBug);
                 return bugDAO.save(updatedBug);
             } else {
                 throw new Exception("Bug not found");
@@ -67,9 +71,9 @@ public class BugServiceImpl implements BugService {
 
     @Override
     public Bug updateBugById(Long bugId, Bug bug) {
-      try{
+        try {
             Optional<Bug> existingBug = bugDAO.findById(bugId);
-            if(existingBug.isPresent()){
+            if (existingBug.isPresent()) {
                 Bug updatedBug = existingBug.get();
                 updatedBug.setBugTitle(bug.getBugTitle());
                 updatedBug.setBugAuthor(bug.getBugAuthor());
@@ -77,19 +81,19 @@ public class BugServiceImpl implements BugService {
                 updatedBug.setOpen(bug.isOpen());
                 System.out.println("Bug found" + updatedBug);
                 return bugDAO.save(updatedBug);
-            }else{
+            } else {
                 throw new Exception("Bug not found");
             }
-      }catch (Exception e) {
-          e.printStackTrace();
-          return null;
-      }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public List<Bug> fetchAllBugsByProjectId(Long projectId) {
         return bugDAO.findByProjectProjectId(projectId);
-        
+
     }
 
 }
