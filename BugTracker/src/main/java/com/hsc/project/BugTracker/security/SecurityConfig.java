@@ -47,11 +47,6 @@ public class SecurityConfig {
         
         return http.cors().and().csrf().disable()
             .authorizeRequests()
-            // .antMatchers(HttpMethod.POST, "/api/bug") .hasAuthority("SCOPE_writebugs")
-            // .antMatchers(HttpMethod.DELETE, "/api//bug") .hasAuthority("SCOPE_deletebugs")
-            // .antMatchers(HttpMethod.PUT, "/api/bug").permitAll()
-            // .antMatchers(HttpMethod.GET, "/api/users").permitAll()
-            // .antMatchers(HttpMethod.POST, "/login").permitAll()
             .antMatchers("/api/*","/api/**").permitAll()
             .and()
             .oauth2ResourceServer(oauth2 -> oauth2.jwt())
