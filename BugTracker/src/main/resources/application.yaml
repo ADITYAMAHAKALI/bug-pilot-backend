@@ -20,3 +20,9 @@ spring:
 
 server:
   port: 9090
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.hibernate: ERROR
+

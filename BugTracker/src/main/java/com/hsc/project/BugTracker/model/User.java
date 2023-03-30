@@ -6,6 +6,8 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +18,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
@@ -24,27 +25,43 @@ import lombok.experimental.SuperBuilder;
 @Data
 @AllArgsConstructor
 @SuperBuilder
-public class User implements UserDetails{
+public class User implements UserDetails {
     // default constructor
-    public User(){}
+    public User() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
+
     @Column(unique = true, nullable = false)
     private String username;
+
     @Column(nullable = false)
     private String password;
+
     @Column(unique = true, nullable = false)
     private String email;
-    @Builder.Default
-    private String role="USER";
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private ProjectRoles projectRoles;
 
     @Override
+    public String getUsername() {
+        return username;
+    }
+    
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return Arrays.asList(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
@@ -59,11 +76,12 @@ public class User implements UserDetails{
 
     @Override
     public boolean isCredentialsNonExpired() {
-       return true;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-       return true;
+        return true;
     }
+
 }

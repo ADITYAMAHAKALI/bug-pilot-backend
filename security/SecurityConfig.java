@@ -20,10 +20,14 @@ import com.hsc.project.BugTracker.dao.UserDAO;
 
 @Configuration
 @EnableWebSecurity
+
 public class SecurityConfig {
     // Applies bcrypt strong hashing encryption
     @Autowired
     UserDAO userRepo;
+
+    private static final String[] SECURED_URLS = {"/api/**"};
+    private static final String[] UNSECURED_URLS={"/login","/register","/api/users","/api/users/**"};
 
 
     @Bean
@@ -31,33 +35,30 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-        return username -> {
-            // to differentiate between the user created by us ans Spring Security User
-            com.hsc.project.BugTracker.model.User user = userRepo.findByUsername(username);
-            if (user != null)
-                return user;
-            throw new UsernameNotFoundException("User '" + username + "' not found");
-        };
-    }
+    // @Bean
+    // public BugUserDetailsService userDetailsService(PasswordEncoder encoder) {
+    //     return username -> {
+    //         // to differentiate between the user created by us ans Spring Security User
+    //         com.hsc.project.BugTracker.model.User user = userRepo.findByUsername(username);
+    //         if (user != null)
+    //             return user;
+    //         throw new UsernameNotFoundException("User '" + username + "' not found");
+    //     };
+    // }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         
-        return http.cors().and().csrf().disable()
-            .authorizeRequests()
-            // .antMatchers(HttpMethod.POST, "/api/bug") .hasAuthority("SCOPE_writebugs")
-            // .antMatchers(HttpMethod.DELETE, "/api//bug") .hasAuthority("SCOPE_deletebugs")
-            // .antMatchers(HttpMethod.PUT, "/api/bug").permitAll()
-            // .antMatchers(HttpMethod.GET, "/api/users").permitAll()
-            // .antMatchers(HttpMethod.POST, "/login").permitAll()
-            .antMatchers("/api/*","/api/**").permitAll()
-            .and()
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt())
-            .logout()
-            .logoutSuccessUrl("/").and()
-            .build();
+        return http.csrf().disable()
+        .authorizeRequests().antMatchers(UNSECURED_URLS)
+        .permitAll()
+        .and()
+        .authorizeHttpRequests()
+        .antMatchers(SECURED_URLS)
+        .hasAuthority("ADMIN")
+        .anyRequest().authenticated()
+        .and()
+        .httpBasic().and().build();
     }
 
     @Bean
