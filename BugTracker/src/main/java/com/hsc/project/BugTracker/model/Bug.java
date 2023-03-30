@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import lombok.Data;
 
@@ -26,6 +25,7 @@ public class Bug {
     private String bugAuthor;
     private String bugLabel;
     private boolean isOpen;
+    private String bugDescription;
 
     @PrePersist
     public void setCreationDateTime() {
@@ -36,12 +36,6 @@ public class Bug {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "projectId")
     private Project project;
-
-    // one bug can be created by one user as author
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
-    private User author;
-
     // default constructor as lombok does not generate it
     Bug() {
     }

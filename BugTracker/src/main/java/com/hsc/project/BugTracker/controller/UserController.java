@@ -1,10 +1,15 @@
 package com.hsc.project.BugTracker.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -39,7 +44,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> RegisterUser(@RequestBody LoginDetails user) {
+    public ResponseEntity<String> RegisterUser(HttpServletRequest request,@RequestBody LoginDetails user) {
         try {
             if (userRepo.findByEmail(user.getEmail()) == null) {
                 return ResponseEntity.badRequest().body("Username doesn't exists");
@@ -49,6 +54,7 @@ public class UserController {
                     JSONObject obj = new JSONObject();
                     obj.put("id" , user1.getUserId());
                     obj.put("message","User Logged in");
+                    
                     return ResponseEntity.ok(obj.toString());
                 } else {
                     return ResponseEntity.badRequest().body("Password doesn't match");
@@ -67,5 +73,14 @@ public class UserController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+    @GetMapping("/api/users/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(userRepo.findById(id).get());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
 
 }
