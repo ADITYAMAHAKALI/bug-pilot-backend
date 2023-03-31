@@ -79,7 +79,7 @@ public class BugServiceImpl implements BugService {
                 updatedBug.setBugAuthor(bug.getBugAuthor());
                 updatedBug.setBugLabel(bug.getBugLabel());
                 updatedBug.setOpen(bug.isOpen());
-                System.out.println("Bug found" + updatedBug);
+                // System.out.println("Bug found" + updatedBug);
                 return bugDAO.save(updatedBug);
             } else {
                 throw new Exception("Bug not found");

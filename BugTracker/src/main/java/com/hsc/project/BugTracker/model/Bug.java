@@ -33,7 +33,7 @@ public class Bug {
     }
 
     // many bugs can be associated with one project
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "projectId")
     private Project project;
     // default constructor as lombok does not generate it
