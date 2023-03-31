@@ -99,7 +99,7 @@ This app is licensed under the GNU License. See the [LICENSE](./LICENSE) file fo
 - [x] Creation of DaoRepositories
 - [x] Creation of Services Interfaces
 - [x] Creation of Services Implementations
-- [ ] Creation of Rest_Controllers
+- [X] Creation of Rest_Controllers
 - [ ] Adding Unit Tests
 - [ ] Adding Outh 2.0 to secure Api's
 - [ ] Adding Swagger to document Api's
@@ -111,33 +111,33 @@ This app is licensed under the GNU License. See the [LICENSE](./LICENSE) file fo
 - [ ] User
 
   - [x] Create User
-  - [ ] Update User
-  - [ ] Delete User
-  - [ ] Get User
-  - [ ] Get All Users
+  - [X] Update User
+  - [X] Delete User
+  - [X] Get User
+  - [X] Get All Users
 
 - [ ] Project
 
-  - [ ] Create Project
-  - [ ] Update Project
-  - [ ] Delete Project
-  - [ ] Get Project
-  - [ ] Get All Projects
-  - [ ] Get All Projects by a user
+  - [X] Create Project
+  - [X] Update Project
+  - [X] Delete Project
+  - [X] Get Project
+  - [X] Get All Projects
+  - [X] Get All Projects by a user
 
 - [ ] ProjectRoles
 
-  - [ ] Create ProjectRoles
+  - [X] Create ProjectRoles
   - [ ] Update ProjectRoles
   - [ ] Delete ProjectRoles
   - [ ] Get ProjectRoles
   - [ ] Get All ProjectRoles
 
-- [ ] Bug
-  - [ ] Create Bugs in project
-  - [ ] Update Bug in project
-  - [ ] Delete Bug
-  - [ ] Get Bug
-  - [ ] Get All Bugs in a project
-        = [ ] Get All Bugs in a project by a user
-  - [ ] Get All Bugs in a project by a user and a status
+- [X] Bug
+  - [X] Create Bugs in project
+  - [X] Update Bug in project
+  - [X] Delete Bug
+  - [X] Get Bug
+  - [X] Get All Bugs in a project
+        = [X] Get All Bugs in a project by a user
+  - [X] Get All Bugs in a project by a user and a status
