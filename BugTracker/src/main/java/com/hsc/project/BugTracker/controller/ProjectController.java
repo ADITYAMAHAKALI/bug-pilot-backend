@@ -35,11 +35,13 @@ public class ProjectController {
         
         return ResponseEntity.ok(projectService.fetchAllProjectsByUserId(userId));
     }
+   
     @PostMapping
     public ResponseEntity<Project> saveProject(@RequestBody Project project,@PathVariable("user_id") Long userId) {
             Project new_project = projectService.saveProject(project,userId);
             return ResponseEntity.ok(new_project);
     }
+  
     @GetMapping("/{id}")
     public ResponseEntity<Project> getProjectById(@PathVariable Long id) {
         try {
@@ -53,6 +55,7 @@ public class ProjectController {
             return ResponseEntity.notFound().build();
         }
     }
+   
     @PutMapping("/{id}") // this id is my project id
     public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody Project project) {
         try {
@@ -69,6 +72,7 @@ public class ProjectController {
             return ResponseEntity.notFound().build();
         }
     }
+   
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProject(@PathVariable Long id) {
         try {

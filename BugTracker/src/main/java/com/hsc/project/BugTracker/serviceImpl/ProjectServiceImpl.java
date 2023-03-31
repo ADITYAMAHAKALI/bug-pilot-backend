@@ -86,14 +86,6 @@ public class ProjectServiceImpl implements ProjectService {
         }
     }
 
-    // @Override
-    // public List<Bug> fetchAllBugsByProjectId(Long projectId) {
-    //     if (projectDAO.findById(projectId) != null) {
-    //         return null;
-    //     } else {
-    //         throw new RuntimeException("Project not found");
-    //     }
-    // }
 
     @Override
     public List<Project> fetchAllProjectsByUserId(Long userId) {

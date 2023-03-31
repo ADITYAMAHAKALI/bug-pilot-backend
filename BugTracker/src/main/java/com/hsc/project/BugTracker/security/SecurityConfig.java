@@ -25,7 +25,6 @@ public class SecurityConfig {
     @Autowired
     UserDAO userRepo;
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -67,8 +66,6 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
-
-    
+ 
 }
 
